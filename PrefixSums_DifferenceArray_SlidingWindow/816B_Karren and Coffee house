@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n, k, q;
+    cin >> n >> k >> q;
+
+    int maxtemp = 200000;
+
+    vector<long long> diff(maxtemp + 2, 0);
+    for (int i = 0; i < n; i++)
+    {
+        int l, r;
+        cin >> l >> r;
+
+        diff[l]++;
+        diff[r + 1]--;
+    }
+    vector<long long> prediff(maxtemp + 2, 0);
+
+    for (int i = 1; i <= maxtemp; i++)
+    {
+        prediff[i] = prediff[i - 1] + diff[i];
+    }
+    vector<long long> yes(maxtemp + 2, 0);
+
+    for (int i = 1; i <= maxtemp; i++)
+    {
+        if (prediff[i] >= k)
+        {
+            yes[i] = 1;
+        }
+    }
+    vector<long long> psum(maxtemp + 2, 0);
+
+    for (int i = 1; i <= maxtemp; i++)
+    {
+        psum[i] = psum[i - 1] + yes[i];
+    }
+
+    while (q--)
+    {
+        int a, b;
+        cin >> a >> b;
+
+        cout << psum[b] - psum[a - 1] << '\n';
+    }
+
+    return 0;
+}
