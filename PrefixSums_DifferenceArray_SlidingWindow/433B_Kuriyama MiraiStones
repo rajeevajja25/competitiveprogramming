@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+
+ios::sync_with_stdio(false);
+cin.tie(nullptr);
+
+int n;
+cin>>n;
+
+vector<long long>v(n+1);
+
+
+for(int i=0;i<n;i++){
+cin>>v[i];
+
+}
+
+
+vector<long long>u=v;
+
+sort(u.begin(),u.end());
+
+vector<long long>pv(n+1);
+vector<long long>pu(n+1);
+
+pu[0]=0;
+pv[0]=0;
+
+for(int i=0;i<n;i++){
+pv[i+1]=pv[i]+v[i];
+pu[i+1]=pu[i]+u[i];
+
+}
+
+int q;
+cin>>q;
+while(q--){
+int type,l,r;
+cin>>type>>l>>r;
+
+if(type==1){
+ cout<<pv[r]-pv[l-1]<< '\n';
+}
+else{
+
+cout<<pu[r]-pu[l-1];
+
+
+}
+
+
+
+
+
+
+}
+
+}
